@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using GalaSoft.MvvmLight.Ioc;
 using MahApps.Metro.Controls;
 
 namespace MetroApp
@@ -10,6 +11,9 @@ namespace MetroApp
     {
         public MainWindow()
         {
+            // need to register ourselves as default MetroWindow for dialogs
+            SimpleIoc.Default.Register<MetroWindow>( () => this );
+
             InitializeComponent();
         }
     }

@@ -9,6 +9,7 @@
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -27,16 +28,16 @@ namespace MetroApp.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            ////if (ViewModelBase.IsInDesignModeStatic)
-            ////{
-            ////    // Create design time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DesignDataService>();
-            ////}
-            ////else
-            ////{
-            ////    // Create run time view services and models
-            ////    SimpleIoc.Default.Register<IDataService, DataService>();
-            ////}
+            if( ViewModelBase.IsInDesignModeStatic )
+            {
+                // Create design time view services and models
+                SimpleIoc.Default.Register<Basics.IDialogService, Basics.DesignDialogService>();
+            }
+            else
+            {
+                // Create run time view services and models
+                SimpleIoc.Default.Register<Basics.IDialogService, Basics.MetroDialogService>();
+            }
 
             SimpleIoc.Default.Register<MainViewModel>();
         }
